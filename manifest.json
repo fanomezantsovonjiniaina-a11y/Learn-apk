@@ -1,7 +1,7 @@
 {
-  "name": "Learn - Language App",
+  "name": "Learn - French and English",
   "short_name": "Learn",
-  "description": "Learn French and English with 200 lessons",
+  "description": "Learn French and English with 200 interactive lessons. Free language learning app.",
   "start_url": "/Learn-apk/",
   "scope": "/Learn-apk/",
   "display": "standalone",
