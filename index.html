@@ -164,7 +164,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);heig
 .fb-btn.bad-btn{background:var(--red);color:#fff}
 
 /* CHECK BTN */
-.check-wrap{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--bg);padding:12px 16px calc(env(safe-area-inset-bottom,0px) + 80px);border-top:1px solid var(--brd);z-index:150}
+.check-wrap{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--bg);padding:12px 16px calc(env(safe-area-inset-bottom,0px) + 16px);border-top:1px solid var(--brd);z-index:150}
 .btn-check{width:100%;padding:16px;background:var(--green);color:#fff;border:none;border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;cursor:pointer;transition:.15s;letter-spacing:.3px}
 .btn-check:disabled{background:var(--card2);color:var(--text3);cursor:not-allowed}
 
@@ -2675,6 +2675,7 @@ function buildUnits(cur){
 // ─────────────────────────────────────────
 function startLesson(lesson){
   LS={id:lesson.id,qs:shuffle([...lesson.qs]),qi:0,ok:0,ans:0,sel:null,mleft:null,mright:null,mmap:{},mpairs:0,mdone:0,wsel:null,showing:false};
+  document.getElementById('bnav').style.display='none';
   show('lesson');
   renderHearts();
   renderQ();
@@ -2800,7 +2801,7 @@ function showFB(ok,q){
 }
 function hideFB(){document.getElementById('fb-bar').className='fb-bar';document.getElementById('btn-check').style.display='block';}
 function nextQ(){LS.qi++;renderQ();}
-function exitLesson(){goHome();}
+function exitLesson(){document.getElementById('bnav').style.display='flex';goHome();}
 
 // ─────────────────────────────────────────
 // FINISH
@@ -2820,6 +2821,7 @@ function finishLesson(){
   document.getElementById('ld-xp2').textContent=xpBonus;
   document.getElementById('ld-xp').textContent='+'+xpBonus+' XP';
   document.getElementById('ld-sub').textContent=acc>=90?'Perfect! Outstanding work!':acc>=60?'Great job! Keep it up!':'Good effort! Try again to improve!';
+  document.getElementById('bnav').style.display='flex';
   show('lesson-done');confetti();
 }
 function replayLesson(){
