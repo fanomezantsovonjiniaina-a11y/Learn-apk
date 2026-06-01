@@ -8,6 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Learn">
+<link rel="manifest" href="manifest.json">
 <title>Learn</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -2888,6 +2889,7 @@ function confetti(){
 // ─────────────────────────────────────────
 // INIT
 // ─────────────────────────────────────────
+if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js');
 load();
 updateTopbarAvatar();
 if(!S.user){
