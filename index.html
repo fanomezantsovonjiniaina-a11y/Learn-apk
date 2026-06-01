@@ -3,8 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#0F1117">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Learn">
 <title>Learn</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
@@ -145,21 +151,21 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);heig
 .mitem.mbad{border-color:var(--red);background:var(--red-light)}
 
 /* FEEDBACK */
-.fb-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:480px;padding:18px 20px 30px;z-index:50;transition:.25s}
+.fb-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(110%);width:100%;max-width:480px;padding:18px 20px calc(env(safe-area-inset-bottom,0px) + 24px);z-index:200;transition:.3s ease;border-radius:20px 20px 0 0}
 .fb-bar.show{transform:translateX(-50%) translateY(0)}
-.fb-bar.fb-ok{background:rgba(88,204,2,.12);border-top:2px solid var(--green)}
-.fb-bar.fb-bad{background:rgba(255,75,75,.12);border-top:2px solid var(--red)}
-.fb-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.fb-ic{font-size:28px}
-.fb-title{font-size:15px;font-weight:900}
-.fb-hint{font-size:12px;color:var(--text2);margin-top:2px}
-.fb-btn{width:100%;padding:14px;border:none;border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;cursor:pointer}
+.fb-bar.fb-ok{background:#0d2b00;border-top:3px solid var(--green)}
+.fb-bar.fb-bad{background:#2b0000;border-top:3px solid var(--red)}
+.fb-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.fb-ic{font-size:32px}
+.fb-title{font-size:16px;font-weight:900}
+.fb-hint{font-size:13px;color:var(--text2);margin-top:3px}
+.fb-btn{width:100%;padding:16px;border:none;border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;cursor:pointer;letter-spacing:.3px}
 .fb-btn.ok-btn{background:var(--green);color:#fff}
 .fb-btn.bad-btn{background:var(--red);color:#fff}
 
 /* CHECK BTN */
-.check-wrap{padding:0 16px 16px;flex-shrink:0;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--bg);padding:12px 16px 20px;border-top:1px solid var(--brd)}
-.btn-check{width:100%;padding:15px;background:var(--green);color:#fff;border:none;border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;cursor:pointer;transition:.15s}
+.check-wrap{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--bg);padding:12px 16px calc(env(safe-area-inset-bottom,0px) + 16px);border-top:1px solid var(--brd);z-index:100}
+.btn-check{width:100%;padding:16px;background:var(--green);color:#fff;border:none;border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;cursor:pointer;transition:.15s;letter-spacing:.3px}
 .btn-check:disabled{background:var(--card2);color:var(--text3);cursor:not-allowed}
 
 /* LESSON DONE */
@@ -228,13 +234,52 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);heig
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
 .slide-up{animation:slideUp .3s ease}
 .shake{animation:shake .35s ease}
+
+/* LOGIN */
+#login{align-items:center;justify-content:center;padding:40px 24px;text-align:center;background:radial-gradient(ellipse at 50% 0%,#0d1f3c,var(--bg) 65%)}
+.login-logo{font-size:72px;margin-bottom:10px;animation:bounceIn .7s ease}
+.login-title{font-size:36px;font-weight:900;color:var(--green);letter-spacing:-1px;margin-bottom:6px}
+.login-sub{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:40px}
+.login-features{display:flex;flex-direction:column;gap:10px;margin-bottom:40px;text-align:left}
+.lf-item{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--brd);border-radius:var(--r2);padding:12px 14px}
+.lf-em{font-size:22px;flex-shrink:0}
+.lf-txt{font-size:13px;font-weight:700}
+.lf-sub{font-size:11px;color:var(--text2);margin-top:2px}
+.btn-google{width:100%;padding:15px;background:#fff;color:#1f1f1f;border:none;border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:.2s}
+.btn-google:active{transform:scale(.97)}
+.btn-google svg{flex-shrink:0}
+.btn-guest{width:100%;padding:13px;background:transparent;color:var(--text2);border:1px solid var(--brd);border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer}
+.login-terms{font-size:11px;color:var(--text3);margin-top:16px;line-height:1.6}
+
+/* USER AVATAR */
+.user-av-sm{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid var(--green)}
+.user-av-lg{width:76px;height:76px;border-radius:50%;object-fit:cover;border:3px solid var(--green);margin:0 auto 12px}
 </style>
 </head>
 <body>
 <div class="app">
 
+<!-- LOGIN -->
+<div id="login" class="screen active">
+  <div class="login-logo">🦉</div>
+  <div class="login-title">Learn</div>
+  <div class="login-sub">French &amp; English · 200 lessons<br>Free · For everyone</div>
+  <div class="login-features">
+    <div class="lf-item"><div class="lf-em">🇫🇷🇬🇧</div><div><div class="lf-txt">2 languages</div><div class="lf-sub">French and English — 100 lessons each</div></div></div>
+    <div class="lf-item"><div class="lf-em">🏆</div><div><div class="lf-txt">XP, streaks &amp; levels</div><div class="lf-sub">From A1 Beginner to B2 Advanced</div></div></div>
+    <div class="lf-item"><div class="lf-em">☁️</div><div><div class="lf-txt">Save your progress</div><div class="lf-sub">Your score saved with your account</div></div></div>
+  </div>
+  <button class="btn-google" onclick="signInGoogle()">
+    <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+    Continue with Google
+  </button>
+  <div id="g-btn-wrap" style="margin-bottom:12px"></div>
+  <button class="btn-guest" onclick="signInGuest()">Continue as Guest</button>
+  <div class="login-terms">By continuing you agree to our Terms of Service.<br>Your progress will be saved locally.</div>
+</div>
+
 <!-- SPLASH -->
-<div id="splash" class="screen active">
+<div id="splash" class="screen">
   <div class="splash-logo">🦉</div>
   <div class="splash-title">Learn</div>
   <div class="splash-sub">French &amp; English · For everyone</div>
@@ -261,7 +306,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);heig
 <!-- HOME -->
 <div id="home" class="screen">
   <div class="topbar">
-    <div class="brand">🦉 Learn</div>
+    <div style="display:flex;align-items:center;gap:8px"><div class="brand">🦉 Learn</div><div id="topbar-avatar" style="display:none"></div></div>
     <div class="topbar-chips">
       <div class="chip chip-fire">🔥<span id="h-streak">0</span></div>
       <div class="chip chip-xp">⚡<span id="h-xp">0</span></div>
@@ -342,7 +387,8 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);heig
 <!-- PROFILE -->
 <div id="profile" class="screen">
   <div class="prof-top">
-    <div class="prof-av">🦉</div>
+    <div id="prof-user-wrap" style="text-align:center;margin-bottom:8px"></div>
+    <div class="prof-av" id="prof-av-em">🦉</div>
     <div class="prof-name">Learner</div>
     <div class="prof-lv" id="prof-lv">A1 — Beginner</div>
   </div>
@@ -2491,10 +2537,62 @@ const LEVELS=[
 // ─────────────────────────────────────────
 // STATE
 // ─────────────────────────────────────────
-let S={lang:null,xp:0,streak:0,best:0,hearts:5,correct:0,total:0,lessons:0,daily:0,lastDate:'',done:{},frXp:0,enXp:0};
+let S={lang:null,xp:0,streak:0,best:0,hearts:5,correct:0,total:0,lessons:0,daily:0,lastDate:'',done:{},frXp:0,enXp:0,user:null};
 let LS={id:null,qs:[],qi:0,ok:0,ans:0,sel:null,mleft:null,mright:null,mmap:{},mpairs:0,mdone:0,wsel:null,showing:false};
 
 function load(){try{const d=localStorage.getItem('lr');if(d)S={...S,...JSON.parse(d)};}catch(e){}checkStreak();}
+// ─────────────────────────────────────────
+// AUTH
+// ─────────────────────────────────────────
+function signInGoogle(){
+  if(typeof google==='undefined'){toast('Google Sign-In unavailable');signInGuest();return;}
+  google.accounts.id.initialize({
+    client_id:'YOUR_GOOGLE_CLIENT_ID',
+    callback:handleGoogleCredential,
+    auto_select:false,
+    cancel_on_tap_outside:true
+  });
+  google.accounts.id.prompt(notification=>{
+    if(notification.isNotDisplayed()||notification.isSkippedMoment()){
+      google.accounts.id.renderButton(document.getElementById('g-btn-wrap'),{theme:'outline',size:'large',width:320});
+    }
+  });
+}
+function handleGoogleCredential(response){
+  try{
+    const parts=response.credential.split('.');
+    const payload=JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+    S.user={name:payload.name||'User',email:payload.email||'',picture:payload.picture||'',type:'google'};
+    save();afterLogin();
+  }catch(e){toast('Login error');signInGuest();}
+}
+function signInGuest(){
+  S.user={name:'Guest',email:'',picture:'',type:'guest'};
+  save();afterLogin();
+}
+function afterLogin(){
+  updateTopbarAvatar();
+  if(S.lang){document.getElementById('bnav').style.display='flex';navTo('home',0);}
+  else show('splash');
+  setTimeout(()=>{if(!S.lang)show('langselect');},2300);
+}
+function signOut(){
+  if(!confirm('Sign out and reset session?'))return;
+  S={lang:null,xp:0,streak:0,best:0,hearts:5,correct:0,total:0,lessons:0,daily:0,lastDate:'',done:{},frXp:0,enXp:0,user:null};
+  save();
+  document.getElementById('bnav').style.display='none';
+  show('login');
+}
+function updateTopbarAvatar(){
+  const wrap=document.getElementById('topbar-avatar');
+  if(!wrap)return;
+  if(S.user&&S.user.picture){
+    wrap.innerHTML=`<img src="${S.user.picture}" class="user-av-sm" alt="avatar">`;
+    wrap.style.display='block';
+  }else{
+    wrap.innerHTML='';wrap.style.display='none';
+  }
+}
 function save(){localStorage.setItem('lr',JSON.stringify(S));}
 function checkStreak(){
   const today=new Date().toDateString();
@@ -2757,8 +2855,21 @@ function buildProfile(){
   document.getElementById('pp-cor').textContent=S.total>0?Math.round(S.correct/S.total*100)+'%':'0%';
   document.getElementById('btn-fr').className='lang-btn'+(S.lang==='fr'?' active-lang':'');
   document.getElementById('btn-en').className='lang-btn'+(S.lang==='en'?' active-lang':'');
+  const userWrap=document.getElementById('prof-user-wrap');
+  if(userWrap){
+    const emojiAv=document.getElementById('prof-av-em');
+    if(S.user&&S.user.name){
+      if(emojiAv)emojiAv.style.display=S.user.picture?'none':'';
+      const pic=S.user.picture?`<img src="${S.user.picture}" class="user-av-lg" alt="avatar">`:'<div style="width:76px;height:76px;border-radius:50%;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 12px">👤</div>';
+      const badge=S.user.type==='google'?'<span style="font-size:11px;background:#4285F4;color:#fff;padding:2px 8px;border-radius:20px;margin-top:4px;display:inline-block">Google</span>':'<span style="font-size:11px;background:var(--card2);color:var(--text2);padding:2px 8px;border-radius:20px;margin-top:4px;display:inline-block">Guest</span>';
+      userWrap.innerHTML=`${pic}<div style="font-size:17px;font-weight:900">${S.user.name}</div>${S.user.email?`<div style="font-size:12px;color:var(--text2);margin-top:2px">${S.user.email}</div>`:''}${badge}<button onclick="signOut()" style="margin-top:16px;padding:10px 24px;background:transparent;color:var(--red);border:1px solid var(--red);border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer">Sign out</button>`;
+    }else{
+      userWrap.innerHTML='';
+      if(emojiAv)emojiAv.style.display='';
+    }
+  }
 }
-function resetAll(){if(!confirm('Reset all progress?'))return;S={lang:S.lang,xp:0,streak:0,best:0,hearts:5,correct:0,total:0,lessons:0,daily:0,lastDate:'',done:{},frXp:0,enXp:0};save();buildHome();toast('Progress reset ✓');}
+function resetAll(){if(!confirm('Reset all progress?'))return;S={lang:S.lang,xp:0,streak:0,best:0,hearts:5,correct:0,total:0,lessons:0,daily:0,lastDate:'',done:{},frXp:0,enXp:0,user:S.user};save();buildHome();toast('Progress reset ✓');}
 
 // ─────────────────────────────────────────
 // UTILS
@@ -2776,10 +2887,16 @@ function confetti(){
 // INIT
 // ─────────────────────────────────────────
 load();
-setTimeout(()=>{
-  if(S.lang){document.getElementById('bnav').style.display='flex';navTo('home',0);}
-  else show('langselect');
-},2300);
+updateTopbarAvatar();
+if(!S.user){
+  show('login');
+}else{
+  setTimeout(()=>{
+    if(S.lang){document.getElementById('bnav').style.display='flex';navTo('home',0);}
+    else show('splash');
+    setTimeout(()=>{if(!S.lang)show('langselect');},2300);
+  },300);
+}
 </script>
 </body>
 </html>
